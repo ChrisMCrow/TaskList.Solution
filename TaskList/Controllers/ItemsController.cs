@@ -26,9 +26,15 @@ namespace TaskList.Controllers
         public ActionResult Create()
         {
             Item newItem = new Item(Request.Form["new-item"]);
-            newItem.Save();
             List<Item> allItems = Item.GetAll();
             return View("Index", allItems);
+        }
+
+        [HttpGet("/items/{id}")]
+        public ActionResult Details(int id)
+        {
+            Item item = Item.Find(id);
+            return View(item);
         }
     }
 }
