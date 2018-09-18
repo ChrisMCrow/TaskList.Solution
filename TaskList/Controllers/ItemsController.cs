@@ -25,5 +25,12 @@ namespace TaskList.Controllers
             model.Add("category", category);
             return View(model);
         }
+        
+        [HttpGet("/allitems")]
+        public ActionResult ViewAll()
+        {
+            List<Item> allItems = Item.GetAll();
+            return View(allItems);
+        }
     }
 }

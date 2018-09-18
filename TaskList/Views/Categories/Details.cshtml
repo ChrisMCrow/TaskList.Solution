@@ -4,12 +4,12 @@
 
 <div class='container'>
   <h1>Here are all the items in @Model["category"].GetName():</h1>
-    <ol>
+  <ul>
     @foreach (var item in @Model["items"])
     {
       <li><a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription() - @item.GetDueDate()</a></li>
     }
-    </ol>
+  </ul>
   <a href='/categories/@Model["category"].GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
   <a href='/categories'><button class='btn btn-info'>View Categories</button></a>
   <a href='/'><button class='btn btn-success'>Back Home</button></a>

@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class='container'>
+  <h1>All Items</h1>
+  <ul>
+    @foreach(var item in Model)
+    {
+      <li><a href = '/categories/@item.GetCategoryId()/items/@item.GetId()'>@item.GetDescription() - @item.GetDueDate()</a></li>
+    }
+  </ul>
+  <a href="/"><button class="btn btn-success">Back Home</button></a>
+</div>
