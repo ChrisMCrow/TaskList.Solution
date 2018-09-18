@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class='container'>
+  <h3>Here are all the items in this category:</h3>
+  <ol>
+  @foreach (var item in @Model["items"])
+  {
+  <li><a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
+  }
+  </ol>
+  <a href='/categories/@Model["category"].GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
+  <p><a href='/categories'>Return to category list</a></p>
+  <p><a href='/'>Return to Main Page</a></p>
+</div>
