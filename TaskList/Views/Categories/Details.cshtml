@@ -3,13 +3,13 @@
 }
 
 <div class='container'>
-  <h3>Here are all the items in this category:</h3>
-  <ol>
-  @foreach (var item in @Model["items"])
-  {
-  <li><a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a></li>
-  }
-  </ol>
+  <h1>Here are all the items in @Model["category"].GetName():</h1>
+    <ol>
+    @foreach (var item in @Model["items"])
+    {
+      <li><a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription() - @item.GetDueDate()</a></li>
+    }
+    </ol>
   <a href='/categories/@Model["category"].GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
   <a href='/categories'><button class='btn btn-info'>View Categories</button></a>
   <a href='/'><button class='btn btn-success'>Back Home</button></a>

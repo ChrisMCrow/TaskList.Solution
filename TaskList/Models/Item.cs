@@ -9,11 +9,13 @@ namespace TaskList.Models
     {
         private string _description;
         private int _id;
+        private string _dueDate;
 
-        public Item (string description, int id = 0)
+        public Item (string description, string dueDate = "", int id = 0)
         {
             _description = description;
             _id = id;
+            _dueDate = dueDate;
         }
 
 
@@ -30,6 +32,11 @@ namespace TaskList.Models
         public int GetId()
         {
             return _id;
+        }
+
+        public string GetDueDate()
+        {
+            return _dueDate;
         }
 
         public override bool Equals(System.Object otherItem)
@@ -60,7 +67,8 @@ namespace TaskList.Models
             {
                 int itemId = rdr.GetInt32(0);
                 string itemDescription = rdr.GetString(1);
-                Item newItem = new Item(itemDescription, itemId);
+                string itemDueDate = rdr.GetString(2);
+                Item newItem = new Item(itemDescription, itemDueDate, itemId);
                 allItems.Add(newItem);
             }
             conn.Close();
@@ -94,12 +102,17 @@ namespace TaskList.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tasks (description) VALUES (@itemDescription);";
+            cmd.CommandText = @"INSERT INTO tasks (description, due_date) VALUES (@itemDescription, @itemDueDate);";
 
             MySqlParameter description = new MySqlParameter();
             description.ParameterName = "@itemDescription";
             description.Value = _description;
             cmd.Parameters.Add(description);
+
+            MySqlParameter dueDate = new MySqlParameter();
+            dueDate.ParameterName = "@itemDueDate";
+            dueDate.Value = _dueDate;
+            cmd.Parameters.Add(dueDate);
 
             cmd.ExecuteNonQuery();
             _id = (int) cmd.LastInsertedId;
@@ -128,14 +141,16 @@ namespace TaskList.Models
 
             int itemId = 0;
             string itemDescription = "";
+            string dueDate = "";
 
             while (rdr.Read())
             {
                 itemId = rdr.GetInt32(0);
                 itemDescription = rdr.GetString(1);
+                dueDate = rdr.GetString(2);
             }
 
-            Item foundItem = new Item(itemDescription, itemId);
+            Item foundItem = new Item(itemDescription, dueDate, itemId);
 
             conn.Close();
             if (conn != null)

@@ -3,7 +3,8 @@
 }
 
 <div class='container'>
-  <h1>@Model.()</h1>
-
-  <a href = '/categories/@Model.GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
+  <h1>@Model["item"].GetDescription()</h1>
+  <h3>Due on @Model["item"].GetDueDate()</h3>
+  <a href = '/categories/@Model["category"].GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
+  <a href = '/categories/@Model["category"].GetId()'><button class='btn btn-warning'>View "@Model["category"].GetName()"</button></a>
 </div>
