@@ -10,9 +10,9 @@ namespace TaskList.Controllers
         [HttpGet("/categories/{categoryId}/items/new")]
         public ActionResult CreateForm(int categoryId)
         {
-         Dictionary<string, object> model = new Dictionary<string, object>();
-         Category category = Category.Find(categoryId);
-         return View(category);
+            Dictionary<string, object> model = new Dictionary<string, object>();
+            Category category = Category.Find(categoryId);
+            return View(category);
         }
 
         [HttpGet("/categories/{categoryId}/items/{itemId}")]
