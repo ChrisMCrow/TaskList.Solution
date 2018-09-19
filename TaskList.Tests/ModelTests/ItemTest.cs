@@ -84,5 +84,39 @@ namespace TaskList.Tests
             //Assert
             Assert.AreEqual(testItem, foundItem);
         }
+
+        [TestMethod]
+        public void Edit_UpdatesItemInDatabase_String()
+        {
+            //Arrange
+            string firstDescription = "walk the dog";
+            Item testItem = new Item (firstDescription, "2015-09-19", 1);
+            testItem.Save();
+            string secondDescription = "Mow the lawn";
+
+            //Act
+            testItem.Edit(secondDescription);
+
+            string result = Item.Find(testItem.GetId()).GetDescription();
+
+            //Assert
+            Assert.AreEqual(secondDescription, result);
+        }
+
+        //This test doesn't work because we don't know what a deleted database item should return.
+        // [TestMethod]
+        // public void Delete_DeletesItemInDatabase_Item()
+        // {
+        //     //Arrange
+        //     Item testItem = new Item ("walk the dog", "2018-11-11",1);
+        //     testItem.Save();
+        //
+        //     //Act
+        //     testItem.Delete();
+        //     Item result = Item.Find(testItem.GetId());
+        //
+        //     //Assert
+        //     Assert.AreEqual(null, result);
+        // }
     }
 }

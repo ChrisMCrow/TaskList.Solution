@@ -86,6 +86,28 @@ namespace TaskList.Models
             return allItems;
         }
 
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM tasks WHERE id = @thisId;";
+
+            MySqlParameter thisId = new MySqlParameter();
+            thisId.ParameterName = "@thisId";
+            thisId.Value = _id;
+            cmd.Parameters.Add(thisId);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
         public static void DeleteAll()
         {
             MySqlConnection conn = DB.Connection();
@@ -173,6 +195,33 @@ namespace TaskList.Models
             }
 
             return foundItem;
+        }
+
+        public void Edit(string newDescription)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE tasks SET description = @newDescription WHERE id = @searchId;";
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = _id;
+            cmd.Parameters.Add(searchId);
+
+            MySqlParameter description = new MySqlParameter();
+            description.ParameterName = "@newDescription";
+            description.Value = newDescription;
+            cmd.Parameters.Add(description);
+
+            cmd.ExecuteNonQuery();
+            _description = newDescription;
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
         }
     }
 }

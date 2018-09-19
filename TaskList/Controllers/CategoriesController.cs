@@ -40,7 +40,6 @@ namespace TaskList.Controllers
             return View(model);
         }
 
-
         [HttpPost("/items")]
         public ActionResult CreateItem(int categoryId, string itemDescription, string dueDate)
         {
