@@ -4,7 +4,9 @@
 
 
 <div class="container">
-  <h1>Add a new item to @Model.GetName()</h1>
+  <h1>To Do List</h1>
+  <hr />
+  <h2>Add a new item to @Model.GetName()</h2>
   <form action='/items' method='post'>
     <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
     <div class="form-group">

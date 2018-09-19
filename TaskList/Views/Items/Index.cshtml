@@ -3,7 +3,9 @@
 }
 
 <div class='container'>
-  <h1>All Items</h1>
+  <h1>To Do List</h1>
+  <hr />
+  <h2>All Items</h2>
   @foreach (var item in Model)
   {
     <h4>@item.GetDescription() --- Due: @item.GetDueDate() | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>

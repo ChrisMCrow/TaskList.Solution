@@ -15,34 +15,9 @@ namespace TaskList.Models
         public Item (string description, string dueDate = "", int categoryId = 0, int id = 0)
         {
             _description = description;
-            _id = id;
             _dueDate = dueDate;
             _categoryId = categoryId;
-        }
-
-
-        public string GetDescription()
-        {
-            return _description;
-        }
-
-        public void SetDescription(string newDescription)
-        {
-            _description = newDescription;
-        }
-
-        public int GetId()
-        {
-            return _id;
-        }
-
-        public string GetDueDate()
-        {
-            return _dueDate;
-        }
-        public int GetCategoryId()
-        {
-            return _categoryId;
+            _id = id;
         }
 
         public override bool Equals(System.Object otherItem)
@@ -54,10 +29,41 @@ namespace TaskList.Models
             else
             {
                 Item newItem = (Item) otherItem;
-                bool idEquality = (this.GetId() == newItem.GetId());
-                bool descriptionEquality = (this.GetDescription() == newItem.GetDescription());
-                return (idEquality && descriptionEquality);
+                bool areIdsEqual = (this.GetId() == newItem.GetId());
+                bool areDescriptionsEqual = (this.GetDescription() == newItem.GetDescription());
+                return (areIdsEqual && areDescriptionsEqual);
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.GetDescription().GetHashCode();
+        }
+
+
+        public string GetDescription()
+        {
+            return _description;
+        }
+
+        // public void SetDescription(string newDescription)
+        // {
+        //     _description = newDescription;
+        // }
+
+        public int GetId()
+        {
+            return _id;
+        }
+
+        public string GetDueDate()
+        {
+            return _dueDate;
+        }
+
+        public int GetCategoryId()
+        {
+            return _categoryId;
         }
 
         public static List<Item> GetAll()
