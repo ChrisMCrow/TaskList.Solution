@@ -128,6 +128,28 @@ namespace TaskList.Models
             return newCategory;
         }
 
+        public void Delete()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM categories WHERE id = @thisId;";
+
+            MySqlParameter thisId = new MySqlParameter();
+            thisId.ParameterName = "@thisId";
+            thisId.Value = _id;
+            cmd.Parameters.Add(thisId);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
         public static void DeleteAll()
         {
             MySqlConnection conn = DB.Connection();
@@ -180,10 +202,32 @@ namespace TaskList.Models
             }
             return allCategoryItems;
         }
-        //
-        // public void AddItem(Item item)
-        // {
-        //     _items.Add(item);
-        // }
+
+        public void Edit(string newName)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE categories SET name = @newName WHERE id = @searchId;";
+
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@searchId";
+            searchId.Value = _id;
+            cmd.Parameters.Add(searchId);
+
+            MySqlParameter name = new MySqlParameter();
+            name.ParameterName = "@newName";
+            name.Value = newName;
+            cmd.Parameters.Add(name);
+
+            cmd.ExecuteNonQuery();
+            _name = newName;
+
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
     }
 }

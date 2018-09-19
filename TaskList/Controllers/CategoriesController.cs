@@ -53,5 +53,28 @@ namespace TaskList.Controllers
             model.Add("category", foundCategory);
             return View("Details", model);
         }
+
+        [HttpGet("/categories/{categoryId}/update")]
+        public ActionResult UpdateForm(int categoryId)
+        {
+            Category newCategory = Category.Find(categoryId);
+            return View(newCategory);
+        }
+
+        [HttpPost("/categories/{categoryId}/update")]
+        public ActionResult Update(int categoryId, string newName)
+        {
+            Category newCategory = Category.Find(categoryId);
+            newCategory.Edit(newName);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("/categories/{categoryId}/delete")]
+        public ActionResult DeleteItem(int categoryId)
+        {
+            Category newCategory = Category.Find(categoryId);
+            newCategory.Delete();
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -229,5 +229,19 @@ namespace TaskList.Models
                 conn.Dispose();
             }
         }
+
+        public int FindCategoryId()
+        {
+            int categoryId = this.GetCategoryId();
+            Category foundCategory = Category.Find(categoryId);
+            return foundCategory.GetId();
+        }
+
+        public string FindCategoryName()
+        {
+            int categoryId = this.GetCategoryId();
+            Category foundCategory = Category.Find(categoryId);
+            return foundCategory.GetName();
+        }
     }
 }

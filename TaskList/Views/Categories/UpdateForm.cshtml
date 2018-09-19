@@ -5,10 +5,10 @@
 <div class="container">
     <h1>To Do List</h1>
     <hr />
-    <h2>Edit @Model.GetDescription()</h2>
-    <form action="/items/@Model.GetId()/update" method="post">
-        <label for="newDescription">Name:</label>
-        <input name="newDescription" type="text" value="@Model.GetDescription()">
+    <h2>Edit @Model.GetName()</h2>
+    <form action="/categories/@Model.GetId()/update" method="post">
+        <label for="newName">Name:</label>
+        <input name="newName" type="text" value="@Model.GetName()">
         <button class="btn btn-danger" type="submit">Update</button>
     </form>
     <a href='/'><button class='btn btn-success'>Back Home</button></a>

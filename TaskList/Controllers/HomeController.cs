@@ -9,7 +9,8 @@ namespace TaskList.Controllers
         [HttpGet("/")]
         public ActionResult Index()
         {
-            return View();
+            List<Item> allItems = Item.GetAll();
+            return View(allItems);
         }
     }
 }

@@ -8,7 +8,8 @@
   <h2>All Items</h2>
   @foreach (var item in Model)
   {
-    <h4>@item.GetDescription() --- Due: @item.GetDueDate() | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
+      <h4><a href='/categories/@item.GetCategoryId()'>@item.FindCategoryName()</a>: <a href='/categories/@item.FindCategoryId()/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
+      <p>Due @item.GetDueDate()</p>
   }
   <a href="/"><button class="btn btn-success">Back Home</button></a>
 </div>
