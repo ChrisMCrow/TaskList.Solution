@@ -9,12 +9,12 @@
   <ul>
     @foreach (var item in @Model["items"])
     {
-      <h4><a href='/categories/@Model["category"].GetId()/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
+      <h4><a href='/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
       <p>Due @item.GetDueDate()</p>
 
     }
   </ul>
-  <a href='/categories/@Model["category"].GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
+  <a href='/items/new'><button class='btn btn-danger'>Add Item</button></a>
   <a href='/categories'><button class='btn btn-info'>View Categories</button></a>
   <a href='/'><button class='btn btn-success'>Back Home</button></a>
 </div>

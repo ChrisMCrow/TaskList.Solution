@@ -11,5 +11,20 @@
         <input name="newDescription" type="text" value="@Model.GetDescription()">
         <button class="btn btn-danger" type="submit">Update</button>
     </form>
+    <br />
+    <p>Associated Categories:
+      <ul>
+        @foreach (var category in Model.GetCategories())
+        {
+          <li>@category.GetName()</li>
+        }
+      </ul>
+    </p>
+
+    <h3>Add Associated Categories</h3>
+      @foreach (var category in TaskList.Models.Category.GetAll())
+      {
+        <h4>@category.GetName() | <a href='/items/@Model.GetId()/newcategory/@category.GetId()'>Add</a></h4>
+      }
     <a href='/'><button class='btn btn-success'>Back Home</button></a>
 </div>

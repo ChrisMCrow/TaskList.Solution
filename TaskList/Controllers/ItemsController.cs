@@ -47,5 +47,14 @@ namespace TaskList.Controllers
             newItem.Delete();
             return RedirectToAction("Index");
         }
+
+        [HttpGet("/items/{itemId}/newcategory/{categoryId}")]
+        public ActionResult AddCategoryToItem(int itemId, int categoryId)
+        {
+            Category newCategory = Category.Find(categoryId);
+            Item newItem = Item.Find(itemId);
+            newItem.AddCategory(newCategory);
+            return View("UpdateForm", newItem);
+        }
     }
 }

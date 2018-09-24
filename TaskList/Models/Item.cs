@@ -89,7 +89,7 @@ namespace TaskList.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM tasks WHERE id = @ItemId; DELETE FROM categories_items WHERE item_id = @ItemId;";
+            cmd.CommandText = @"DELETE FROM tasks WHERE id = @ItemId; DELETE FROM categories_tasks WHERE task_id = @ItemId;";
 
             MySqlParameter itemIdParameter = new MySqlParameter();
             itemIdParameter.ParameterName = "@ItemId";
@@ -217,17 +217,17 @@ namespace TaskList.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO categories_items (category_id, item_id) VALUES (@CategoryId, @ItemId);";
+            cmd.CommandText = @"INSERT INTO categories_tasks (category_id, task_id) VALUES (@CategoryId, @ItemId);";
 
             MySqlParameter category_id = new MySqlParameter();
             category_id.ParameterName = "@CategoryId";
             category_id.Value = newCategory.GetId();
             cmd.Parameters.Add(category_id);
 
-            MySqlParameter item_id = new MySqlParameter();
-            item_id.ParameterName = "@ItemId";
-            item_id.Value = _id;
-            cmd.Parameters.Add(item_id);
+            MySqlParameter task_id = new MySqlParameter();
+            task_id.ParameterName = "@ItemId";
+            task_id.Value = _id;
+            cmd.Parameters.Add(task_id);
 
             cmd.ExecuteNonQuery();
             conn.Close();
@@ -242,7 +242,7 @@ namespace TaskList.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT category_id FROM categories_items WHERE item_id = @itemId;";
+            cmd.CommandText = @"SELECT category_id FROM categories_tasks WHERE task_id = @itemId;";
 
             cmd.Parameters.Add(new MySqlParameter("@itemId", _id));
 
