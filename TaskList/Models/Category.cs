@@ -192,7 +192,7 @@ namespace TaskList.Models
                 description = rdr.GetString(1);
                 due_date = rdr.GetString(2);
                 category_id = rdr.GetInt32(3);
-                Item newItem = new Item(description, due_date, category_id, id);
+                Item newItem = new Item(description, due_date, id);
                 allCategoryItems.Add(newItem);
             }
             conn.Close();

@@ -10,13 +10,11 @@ namespace TaskList.Models
         private string _description;
         private int _id;
         private string _dueDate;
-        private int _categoryId;
 
-        public Item (string description, string dueDate = "", int categoryId = 0, int id = 0)
+        public Item (string description, string dueDate = "", int id = 0)
         {
             _description = description;
             _dueDate = dueDate;
-            _categoryId = categoryId;
             _id = id;
         }
 
@@ -61,11 +59,6 @@ namespace TaskList.Models
             return _dueDate;
         }
 
-        public int GetCategoryId()
-        {
-            return _categoryId;
-        }
-
         public static List<Item> GetAll()
         {
             List<Item> allItems = new List<Item> {};
@@ -80,8 +73,7 @@ namespace TaskList.Models
                 int itemId = rdr.GetInt32(0);
                 string itemDescription = rdr.GetString(1);
                 string itemDueDate = rdr.GetString(2);
-                int itemCategoryId = rdr.GetInt32(3);
-                Item newItem = new Item(itemDescription, itemDueDate, itemCategoryId, itemId);
+                Item newItem = new Item(itemDescription, itemDueDate, itemId);
                 allItems.Add(newItem);
             }
             conn.Close();
@@ -137,7 +129,7 @@ namespace TaskList.Models
             conn.Open();
 
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO tasks (description, due_date, category_id) VALUES (@itemDescription, @itemDueDate, @itemCategoryId);";
+            cmd.CommandText = @"INSERT INTO tasks (description, due_date, category_id) VALUES (@itemDescription, @itemDueDate);";
 
             MySqlParameter description = new MySqlParameter();
             description.ParameterName = "@itemDescription";
@@ -148,11 +140,6 @@ namespace TaskList.Models
             dueDate.ParameterName = "@itemDueDate";
             dueDate.Value = _dueDate;
             cmd.Parameters.Add(dueDate);
-
-            MySqlParameter categoryId = new MySqlParameter();
-            categoryId.ParameterName = "@itemCategoryId";
-            categoryId.Value = _categoryId;
-            cmd.Parameters.Add(categoryId);
 
             cmd.ExecuteNonQuery();
             _id = (int) cmd.LastInsertedId;
@@ -182,17 +169,15 @@ namespace TaskList.Models
             int itemId = 0;
             string itemDescription = "";
             string dueDate = "";
-            int categoryId = 0;
 
             while (rdr.Read())
             {
                 itemId = rdr.GetInt32(0);
                 itemDescription = rdr.GetString(1);
                 dueDate = rdr.GetString(2);
-                categoryId = rdr.GetInt32(3);
             }
 
-            Item foundItem = new Item(itemDescription, dueDate, categoryId, itemId);
+            Item foundItem = new Item(itemDescription, dueDate, itemId);
 
             conn.Close();
             if (conn != null)
@@ -228,20 +213,6 @@ namespace TaskList.Models
             {
                 conn.Dispose();
             }
-        }
-
-        public int FindCategoryId()
-        {
-            int categoryId = this.GetCategoryId();
-            Category foundCategory = Category.Find(categoryId);
-            return foundCategory.GetId();
-        }
-
-        public string FindCategoryName()
-        {
-            int categoryId = this.GetCategoryId();
-            Category foundCategory = Category.Find(categoryId);
-            return foundCategory.GetName();
         }
     }
 }
