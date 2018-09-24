@@ -10,11 +10,10 @@
   <h2>All Items</h2>
   @foreach (var item in Model)
   {
-    <h4><a href='/categories/@item.GetCategoryId()'>@item.FindCategoryName()</a>: <a href='/categories/@item.FindCategoryId()/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
+    <h4><a href='/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
     <p>Due @item.GetDueDate()</p>
   }
 
   <a href='/categories'><button class='btn btn-info'>View Categories</button></a>
   <a href='/categories/new'><button class='btn btn-warning'>Add Category</button></a>
-  <a href="/allitems"><button class="btn btn-primary">View All Items</button><a/>
 </div>

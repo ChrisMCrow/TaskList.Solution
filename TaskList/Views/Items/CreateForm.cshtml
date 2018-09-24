@@ -6,9 +6,18 @@
 <div class="container">
   <h1>To Do List</h1>
   <hr />
-  <h2>Add a new item to @Model.GetName()</h2>
+  <h2>Add a new item</h2>
   <form action='/items' method='post'>
-    <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
+    <fieldset>
+      <legend>Select Categories to add Item to</legend>
+      @foreach (var category in Model)
+      {
+      <div class="form-group">
+        <input type='checkbox' id='category' name='category' value="@category.GetId()" />
+        <label for='categories'>@category.GetName()</label>
+      </div>
+      }
+    </fieldset>
     <div class="form-group">
       <label for='itemDescription'>Item description</label>
       <input id='itemDescription' name='itemDescription' type='text'>

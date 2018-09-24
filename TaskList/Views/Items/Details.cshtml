@@ -5,8 +5,12 @@
 <div class='container'>
   <h1>To Do List</h1>
   <hr />
-  <h2>@Model["item"].GetDescription()</h2>
-  <h3>Due on @Model["item"].GetDueDate()</h3>
-  <a href = '/categories/@Model["category"].GetId()/items/new'><button class='btn btn-danger'>Add Item</button></a>
-  <a href = '/categories/@Model["category"].GetId()'><button class='btn btn-warning'>View "@Model["category"].GetName()"</button></a>
+  <h2>@Model["items"].GetDescription()</h2>
+  <h3>Due on @Model["items"].GetDueDate()</h3>
+  <a href = '/items/new'><button class='btn btn-danger'>Add Item</button></a>
+  @foreach (var category in Model["categories"])
+  {
+    <a href = '/categories/@category.GetId()'><button class='btn btn-warning'>View "@category.GetName()"</button></a>
+  }
+  <a href='/'><button class='btn btn-success'>Back Home</button></a>
 </div>

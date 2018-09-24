@@ -7,30 +7,22 @@ namespace TaskList.Controllers
 {
     public class ItemsController : Controller
     {
-        [HttpGet("/categories/{categoryId}/items/new")]
+        [HttpGet("/items/new")]
         public ActionResult CreateForm(int categoryId)
         {
-            Dictionary<string, object> model = new Dictionary<string, object>();
-            Category category = Category.Find(categoryId);
-            return View(category);
+            List<Category> allCategories = Category.GetAll();
+            return View(allCategories);
         }
 
-        [HttpGet("/categories/{categoryId}/items/{itemId}")]
+        [HttpGet("/items/{itemId}")]
         public ActionResult Details(int categoryId, int itemId)
         {
-            Item item = Item.Find(itemId);
+            Item newItem = Item.Find(itemId);
+            List<Category> itemsCategories = newItem.GetCategories();
             Dictionary<string, object> model = new Dictionary<string, object>();
-            Category category = Category.Find(categoryId);
-            model.Add("item", item);
-            model.Add("category", category);
+            model.Add("items", newItem);
+            model.Add("categories", itemsCategories);
             return View(model);
-        }
-
-        [HttpGet("/allitems")]
-        public ActionResult Index()
-        {
-            List<Item> allItems = Item.GetAll();
-            return View(allItems);
         }
 
         [HttpGet("/items/{id}/update")]

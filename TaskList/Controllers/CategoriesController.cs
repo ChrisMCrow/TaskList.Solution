@@ -42,11 +42,11 @@ namespace TaskList.Controllers
         }
 
         [HttpPost("/items")]
-        public ActionResult CreateItem(int categoryId, string itemDescription, string dueDate)
+        public ActionResult CreateItem(string itemDescription, string dueDate, string category)
         {
             Dictionary<string, object> model = new Dictionary<string, object>();
             Category foundCategory = Category.Find(categoryId);
-            Item newItem = new Item(itemDescription, dueDate, categoryId);
+            Item newItem = new Item(itemDescription, dueDate);
             newItem.Save();
             List<Item> categoryItems = foundCategory.GetItems();
             model.Add("items", categoryItems);
