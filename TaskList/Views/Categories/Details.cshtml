@@ -1,20 +1,32 @@
-@{
-  Layout = "_Layout";
-}
+@using TaskList.Models;
 
-<div class='container'>
-  <h1>To Do List</h1>
-  <hr />
-  <h2>@Model["category"].GetName() Category:</h2>
+<h1>To Do List</h1>
+<hr />
+<h2>Category: @Model["selectedCategory"].GetName()</h2>
+<hr />
+@if (@Model["categoryItems"].Count != 0)
+{
+  <h4>Here are all the items in this category:</h4>
   <ul>
-    @foreach (var item in @Model["items"])
+    @foreach (var item in @Model["categoryItems"])
     {
-      <h4><a href='/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
+      <h3><a href='/items/@item.GetId()'>@item.GetDescription()</a></h3>
+      <h5><a href="/items/@item.GetId()/delete">Delete</a></h5>
       <p>Due @item.GetDueDate()</p>
-
     }
   </ul>
-  <a href='/items/new'><button class='btn btn-danger'>Add Item</button></a>
-  <a href='/categories'><button class='btn btn-info'>View Categories</button></a>
-  <a href='/'><button class='btn btn-success'>Back Home</button></a>
-</div>
+}
+<h4>Add a item to this category:</h4>
+<form action='/categories/@Model["selectedCategory"].GetId()/items/new' method='post'>
+  <div>
+    <label for='itemId'>Select an item</label>
+    <select id='itemId' name='itemId' type='text'>
+      @foreach (var item in @Model["allItems"])
+      {
+        <option value='@item.GetId()'>@item.GetDescription()</option>
+      }
+    </select>
+    <button type='submit' class='btn btn-primary'>Add</button>
+  </div>
+</form>
+<a href='/'><button class='btn btn-success'>Back Home</button></a>

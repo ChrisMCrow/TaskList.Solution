@@ -12,5 +12,11 @@ namespace TaskList.Controllers
             List<Item> allItems = Item.GetAll();
             return View(allItems);
         }
+
+        [HttpGet("/home/success")]
+        public ActionResult Success()
+        {
+            return View();
+        }
     }
 }

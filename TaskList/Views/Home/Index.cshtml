@@ -1,20 +1,5 @@
-@{
-  Layout = "_Layout";
-}
-
-<div class='container'>
-  <h1>To Do List</h1>
-  <hr />
-  <h2>Home</h2>
-  <hr />
-  <h2>All Items</h2>
-  @foreach (var item in Model)
-  {
-    <h4><a href='/items/@item.GetId()'>@item.GetDescription()</a> | <a href="/items/@item.GetId()/update">Update</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
-    <p>Due @item.GetDueDate()</p>
-  }
-
-  <a href='/categories'><button class='btn btn-info'>View Categories</button></a>
-  <a href='/categories/new'><button class='btn btn-warning'>Add Category</button></a>
-  <a href='/items/new'><button class='btn btn-danger'>Add Item</button></a>
-</div>
+<h1>To Do List</h1>
+<hr />
+<h2>Home</h2>
+<a href='/categories'><button class='btn btn-info'>View Categories</button></a>
+<a href='/items'><button class='btn btn-danger'>View Items</button></a>

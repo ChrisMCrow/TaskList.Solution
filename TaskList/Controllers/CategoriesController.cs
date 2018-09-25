@@ -24,10 +24,9 @@ namespace TaskList.Controllers
         [HttpPost("/categories")]
         public ActionResult Create(string categoryName)
         {
-            Category newCategory = new Category(categoryName);
-            newCategory.Save();
-            List<Category> allCategories = Category.GetAll();
-            return View("Index", allCategories);
+          Category newCategory = new Category(categoryName);
+          newCategory.Save();
+          return RedirectToAction("Success", "Home");
         }
 
         [HttpGet("/categories/{id}")]
@@ -36,36 +35,11 @@ namespace TaskList.Controllers
             Dictionary<string, object> model = new Dictionary<string, object>();
             Category selectedCategory = Category.Find(id);
             List<Item> categoryItems = selectedCategory.GetItems();
-            model.Add("category", selectedCategory);
-            model.Add("items", categoryItems);
+            List<Item> allItems = Item.GetAll();
+            model.Add("selectedCategory", selectedCategory);
+            model.Add("categoryItems", categoryItems);
+            model.Add("allItems", allItems);
             return View(model);
-        }
-
-        [HttpPost("/items")]
-        public ActionResult CreateItem(string itemDescription, string dueDate)
-        {
-            List<Category> checkedCategories = new List<Category> {};
-            Dictionary<string, object> model = new Dictionary<string, object>();
-            Item newItem = new Item(itemDescription, dueDate);
-            newItem.Save();
-            model.Add("items", newItem);
-            model.Add("category", checkedCategories);
-            return View("Details", model);
-        }
-
-        [HttpGet("/categories/{categoryId}/update")]
-        public ActionResult UpdateForm(int categoryId)
-        {
-            Category newCategory = Category.Find(categoryId);
-            return View(newCategory);
-        }
-
-        [HttpPost("/categories/{categoryId}/update")]
-        public ActionResult Update(int categoryId, string newName)
-        {
-            Category newCategory = Category.Find(categoryId);
-            newCategory.Edit(newName);
-            return RedirectToAction("Index");
         }
 
         [HttpGet("/categories/{categoryId}/delete")]
@@ -74,6 +48,15 @@ namespace TaskList.Controllers
             Category newCategory = Category.Find(categoryId);
             newCategory.Delete();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost("/categories/{categoryId}/items/new")]
+        public ActionResult AddItem(int categoryId, int itemId)
+        {
+            Category category = Category.Find(categoryId);
+            Item item = Item.Find(itemId);
+            category.AddItem(item);
+            return RedirectToAction("Details",  new { id = categoryId });
         }
     }
 }

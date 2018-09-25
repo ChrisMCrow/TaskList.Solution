@@ -53,7 +53,7 @@ namespace TaskList.Tests
 
             //Assert
             CollectionAssert.AreEqual(testList, result);
-            }
+        }
 
         [TestMethod]
         public void Save_AssignsIdToObject_Id()
@@ -76,7 +76,7 @@ namespace TaskList.Tests
         public void Find_FindsItemInDatabase_Item()
         {
             //Arrange
-            Item testItem = new Item("Mow the lawn", "", 1);
+            Item testItem = new Item("Mow the lawn", "2018-09-23", 1);
             testItem.Save();
 
             //Act
@@ -91,7 +91,7 @@ namespace TaskList.Tests
         {
             //Arrange
             string firstDescription = "walk the dog";
-            Item testItem = new Item (firstDescription, "2015-09-19", 1);
+            Item testItem = new Item (firstDescription);
             testItem.Save();
             string secondDescription = "Mow the lawn";
 
@@ -104,20 +104,68 @@ namespace TaskList.Tests
             Assert.AreEqual(secondDescription, result);
         }
 
-        //This test doesn't work because we don't know what a deleted database item should return.
-        // [TestMethod]
-        // public void Delete_DeletesItemInDatabase_Item()
-        // {
-        //     //Arrange
-        //     Item testItem = new Item ("walk the dog", "2018-11-11",1);
-        //     testItem.Save();
-        //
-        //     //Act
-        //     testItem.Delete();
-        //     Item result = Item.Find(testItem.GetId());
-        //
-        //     //Assert
-        //     Assert.AreEqual(null, result);
-        // }
+        [TestMethod]
+        public void AddCategory_AddsCategoryToItem_CategoryList()
+        {
+            //Arrange
+            Item testItem = new Item("Mow the lawn");
+            testItem.Save();
+
+            Category testCategory = new Category("Home stuff");
+            testCategory.Save();
+
+            //Act
+            testItem.AddCategory(testCategory);
+
+            List<Category> result = testItem.GetCategories();
+            List<Category> testList = new List<Category>{testCategory};
+
+            //Assert
+            CollectionAssert.AreEqual(testList, result);
+        }
+
+        [TestMethod]
+        public void GetCategories_ReturnsAllItemCategories_CategoryList()
+        {
+            //Arrange
+            Item testItem = new Item("Mow the lawn");
+            testItem.Save();
+
+            Category testCategory1 = new Category("Home stuff");
+            testCategory1.Save();
+
+            Category testCategory2 = new Category("Work stuff");
+            testCategory2.Save();
+
+            //Act
+            testItem.AddCategory(testCategory1);
+            List<Category> result = testItem.GetCategories();
+            List<Category> testList = new List<Category> {testCategory1};
+
+            //Assert
+            CollectionAssert.AreEqual(testList, result);
+        }
+
+        [TestMethod]
+        public void Delete_DeletesItemAssociationsFromDatabase_ItemList()
+        {
+            //Arrange
+            Category testCategory = new Category("Home stuff");
+            testCategory.Save();
+
+            string testDescription = "Mow the lawn";
+            Item testItem = new Item(testDescription);
+            testItem.Save();
+
+            //Act
+            testItem.AddCategory(testCategory);
+            testItem.Delete();
+
+            List<Item> resultCategoryItems = testCategory.GetItems();
+            List<Item> testCategoryItems = new List<Item> {};
+
+            //Assert
+            CollectionAssert.AreEqual(testCategoryItems, resultCategoryItems);
+        }
     }
 }

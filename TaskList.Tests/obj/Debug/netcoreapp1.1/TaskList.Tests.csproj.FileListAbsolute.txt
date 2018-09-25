@@ -24,3 +24,17 @@
 /Users/Guest/Desktop/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.Tests.pdb
 /Users/Guest/Desktop/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.dll
 /Users/Guest/Desktop/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.pdb
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.Tests.deps.json
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.Tests.runtimeconfig.json
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.Tests.runtimeconfig.dev.json
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.Tests.dll
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.Tests.pdb
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.dll
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/bin/Debug/netcoreapp1.1/TaskList.pdb
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/obj/Debug/netcoreapp1.1/TaskList.Tests.csproj.CoreCompileInputs.cache
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/obj/Debug/netcoreapp1.1/TaskList.Tests.AssemblyInfo.cs
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/obj/Debug/netcoreapp1.1/TaskList.Tests.dll
+/Users/Chris/Documents/Programming/Projects/TaskListCSharp/TaskList.Tests/obj/Debug/netcoreapp1.1/TaskList.Tests.pdb
